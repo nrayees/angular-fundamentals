@@ -1,0 +1,18 @@
+<input name="query" placeholder="Enter Search Here" [(ngModel)]="searchQuery" />
+<button (click)="gitSearch()">Submit</button>
+<div *ngIf="searchResults; else elseBlock">
+  <h3 class="total">Total Results: {{ searchResults.total_count }}</h3>
+  <ul class="list">
+    <li class="list_item" *ngFor="let results of searchResults.items">
+      <a [href]="results.html_url">
+        <img class="avatar" [src]="results.owner.avatar_url" />
+        <h4 class="title"> {{ results.name }}
+          <small> by {{ results.owner.login | uppercase }} </small>
+        </h4>
+      </a>
+      <p class="description"> {{ results.description }} </p>
+      <p>Created On: {{ results.created_at | date:'fullDate'}} </p>
+    </li>
+  </ul>
+</div>
+<ng-template #elseBlock>Loading....</ng-template>
